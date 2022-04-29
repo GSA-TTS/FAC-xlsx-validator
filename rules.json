@@ -1,0 +1,22 @@
+{
+    "version": "0.0.1",
+    "last-updated": "2022-04-29",
+    "rules": [
+        {
+            "id": "SHEET_DATA_ENTRY_EXISTS",
+            "category": "sheetexists",
+            "sheetname": "Data_Entry",
+            "description": "Check to see if the sheet called 'Data_Entry' exists",
+            "message": "Your workbook is missing the sheet named SHEETNAME"
+        },
+        {
+            "id": "EIN_VALUE_EXISTS",
+            "category": "cellvaluetype",
+            "sheetname": "Data_Entry",
+            "location": "D2",
+            "type": "integer",
+            "description": "Looking for a valid EIN value in cell D2.",
+            "message": "Expected a whole number, or integer, in cell LOCATION of sheet SHEETNAME"
+        }
+    ]
+}
