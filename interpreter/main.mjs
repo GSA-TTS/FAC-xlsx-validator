@@ -21,7 +21,7 @@ function runRule(wb, rule) {
 
 function runRules(wb, rules) {
     var results = [];
-    for (const r of rules.rules) {
+    for (var r of rules.rules) {
         var result = runRule(wb, r);
         results.push(result);
     }

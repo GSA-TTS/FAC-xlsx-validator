@@ -23,7 +23,7 @@ async function processWorkbook (path) {
     console.log(workbook)
     
     var rules = null;
-    readTextFile("./interpreter/rules.json", function(text){
+    readTextFile("./rules.json", function(text){
         rules = JSON.parse(text);
         console.log(rules);
 
@@ -32,12 +32,10 @@ async function processWorkbook (path) {
             Promise.resolve().then(_ => {
                 var results = interpreter.runRules(workbook, rules);
                 console.log(results);
-                results.map(v => console.log(typeof(v)))
+                results.map(v => console.log(v.isSuccess));
             });
         }
     });
-    
-
 }
 
 document.addEventListener('drop', (event) => {

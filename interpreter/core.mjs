@@ -6,6 +6,11 @@ class Result {
         this.wb = wb;
         this.rule = rule;
         this.message = msg;
+        this.type == "RESULT";
+    }
+
+    get isSuccess() {
+        return this.type === SUCCESS;
     }
 };
 
