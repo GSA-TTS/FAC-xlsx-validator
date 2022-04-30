@@ -1,4 +1,5 @@
-const core = require('./core.mjs');
+// const core = require('./core.mjs');
+import * as core from './core.mjs';
 
 function sheetExists (wb, rule) {
     var found = false;
@@ -18,4 +19,5 @@ function sheetExists (wb, rule) {
 }
 
 /* Exports */
-exports.sheetExists = sheetExists;
+// exports.sheetExists = sheetExists;
+export {sheetExists};

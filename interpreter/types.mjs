@@ -1,4 +1,5 @@
-const core = require('./core.mjs');
+// const core = require('./core.mjs');
+import * as core from './core.mjs';
 
 var types = {
     "integer": locationIsInteger
@@ -18,9 +19,12 @@ function locationIsInteger(wb, rule) {
 }
 
 function locationIsType(wb, rule) {
-    return types[rule.type](wb, rule);
+    if (rule.type in types) {
+        return types[rule.type](wb, rule);
+    } else {
+        return new core.Failure(wb, rule, rule.type + " not a valid type check in sheet");
+    }
 }
 
 /* Exports */
-exports.locationIsType = locationIsType;
-exports.locationIsInteger = locationIsInteger;
+export {locationIsType, locationIsInteger};

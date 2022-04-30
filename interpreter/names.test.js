@@ -1,5 +1,7 @@
-const core = require('./core.mjs');
-const names = require('./names.mjs');
+//const core = require('./core.mjs');
+import * as core from './core.mjs';
+// const names = require('./names.mjs');
+import * as names from './names.mjs';
 
 test('success returns Success', () => {
     var wb = {};

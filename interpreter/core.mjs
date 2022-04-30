@@ -14,6 +14,4 @@ class Failure extends Result {};
 
 /* Exports */
 // https://www.sitepoint.com/understanding-module-exports-exports-node-js/
-exports.Result = Result;
-exports.Success = Success;
-exports.Failure = Failure;
+export {Result, Success, Failure};
