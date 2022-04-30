@@ -30,7 +30,9 @@ async function processWorkbook (path) {
         // FIXME: What if the rules don't load?
         if (rules != null) {
             Promise.resolve().then(_ => {
-                interpreter.runRules(workbook, rules);
+                var results = interpreter.runRules(workbook, rules);
+                console.log(results);
+                results.map(v => console.log(typeof(v)))
             });
         }
     });

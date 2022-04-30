@@ -1,7 +1,7 @@
 // https://jestjs.io/docs/getting-started
 // jest --verbose=false core
-// const core = require('./core.mjs');
-import * as core from './core.mjs';
+const core = require('./core.mjs');
+//import * as core from './core.mjs';
 
 test('class Result exists', () => {
   var r = new core.Result();

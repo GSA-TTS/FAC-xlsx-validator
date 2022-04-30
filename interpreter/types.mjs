@@ -1,4 +1,4 @@
-// const core = require('./core.mjs');
+//const core = require('./core.mjs');
 import * as core from './core.mjs';
 
 var types = {
@@ -11,11 +11,11 @@ function locationIsInteger(wb, rule) {
     var n = Math.floor(Number(s));
     if (isNaN(n) || (n !== Infinity && String(n) === s && n >= 0)) {
         var msg = rule.message;
-        msg = msg.replace("LOCATION", r.location);
-        msg = msg.replace("SHEETNAME", r.sheetname);
-        return core.Failure(wb, rule, msg);
+        msg = msg.replace("LOCATION", rule.location);
+        msg = msg.replace("SHEETNAME", rule.sheetname);
+        return new core.Failure(wb, rule, msg);
     }
-    return core.Success(wb, rule, rule.location + " is typeof " + rule.type);
+    return new core.Success(wb, rule, rule.location + " is typeof " + rule.type);
 }
 
 function locationIsType(wb, rule) {
@@ -28,3 +28,5 @@ function locationIsType(wb, rule) {
 
 /* Exports */
 export {locationIsType, locationIsInteger};
+//exports.locationIsType = locationIsType;
+//exports.locationIsInteger = locationIsInteger;

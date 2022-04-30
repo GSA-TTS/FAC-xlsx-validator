@@ -9,9 +9,22 @@ class Result {
     }
 };
 
-class Success extends Result {};
-class Failure extends Result {};
+class Success extends Result {
+    constructor (wb, rule, msg) {
+        super(wb,rule,msg);
+        this.type = SUCCESS;
+    }
+};
+class Failure extends Result {
+    constructor (wb, rule, msg) {
+        super(wb,rule,msg);
+        this.type = FAILURE;
+    }
+};
 
 /* Exports */
 // https://www.sitepoint.com/understanding-module-exports-exports-node-js/
-export {Result, Success, Failure};
+export {SUCCESS, FAILURE, Result, Success, Failure};
+//exports.Result = Result;
+//exports.Success = Success;
+//exports.Failure = Failure;

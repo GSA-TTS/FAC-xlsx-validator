@@ -1,8 +1,8 @@
 //const core = require('./core.mjs');
 import * as core from './core.mjs';
-// const names = require('./names.mjs');
+//const names = require('./names.mjs');
 import * as names from './names.mjs';
-// const types = require('./types.mjs');
+//const types = require('./types.mjs');
 import * as types from './types.mjs';
 
 var rule_lookup = {
@@ -30,3 +30,5 @@ function runRules(wb, rules) {
 
 /* Exports */
 export {runRules, runRule};
+//exports.runRule = runRule;
+//exports.runRules = runRules;

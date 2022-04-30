@@ -1,6 +1,6 @@
-// const core = require('./core.mjs');
+//const core = require('./core.mjs');
 import * as core from './core.mjs';
-// const main = require("./main.mjs");
+//const main = require("./main.mjs");
 import * as main from './main.mjs';
 
 test('run on empty', () => {
