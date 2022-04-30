@@ -4,14 +4,14 @@
     "rules": [
         {
             "id": "SHEET_DATA_ENTRY_EXISTS",
-            "category": "sheetexists",
+            "category": "sheet_exists",
             "sheetname": "Data_Entry",
             "description": "Check to see if the sheet called 'Data_Entry' exists",
             "message": "Your workbook is missing the sheet named SHEETNAME"
         },
         {
             "id": "EIN_VALUE_EXISTS",
-            "category": "cellvaluetype",
+            "category": "cell_value_type",
             "sheetname": "Data_Entry",
             "location": "D2",
             "type": "integer",

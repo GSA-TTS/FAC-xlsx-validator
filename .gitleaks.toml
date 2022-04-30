@@ -1,5 +1,0 @@
-[allowlist]
-description = "global allow lists"
-paths = [
-    '''local/xlsx.full.min.js'''
-]

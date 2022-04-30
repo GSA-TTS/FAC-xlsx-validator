@@ -18,13 +18,13 @@ async function runRules(wb, rules) {
             case "sheetexists":
                 var found = false;
                 for (const sn of wb.SheetNames) {
-                    if (sn.match(r.sheetname)) {
+                    if (sn === r.sheetname) {
                         found = true;
                     }
                 }
                 if (!found) {
                     msg = r.message;
-                    msg.replace("SHEETNAME", r.sheetname);
+                    msg = msg.replace("SHEETNAME", r.sheetname);
                     console.log(msg);
                 } else {
                     console.log("Found sheet '" + r.sheetname + "'")
