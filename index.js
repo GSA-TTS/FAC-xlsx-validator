@@ -10,6 +10,23 @@ function readTextFile(file, callback) {
     rawFile.send(null);
 }
 
+function createAlertMessage(wb, rule, msg) {
+    var div_alert = document.createElement("div");
+    div_alert.setAttribute("class", "usa-alert usa-alert--" + rule.status)
+    var div_alert_body = document.createElement("div");
+    div_alert_body.setAttribute("class", "usa-alert__body");
+    var h4 = document.createElement("h4");
+    h4.setAttribute("class", "usa-alert__heading");
+    h4.innerText = rule.title;
+    var p = document.createElement("p");
+    p.setAttribute("class", "usa-alert__text");
+    p.innerHTML = msg;
+    div_alert_body.appendChild(h4);
+    div_alert_body.appendChild(p);
+    div_alert.appendChild(div_alert_body);
+    return div_alert
+}
+
 async function processWorkbook (path) {
     console.log(path)
     const workbook = await fetch(path)
@@ -31,8 +48,26 @@ async function processWorkbook (path) {
         if (rules != null) {
             Promise.resolve().then(_ => {
                 var results = interpreter.runRules(workbook, rules);
-                console.log(results);
-                results.map(v => console.log(v.isSuccess));
+                var counter = 0;
+                var ol = document.createElement("ol");
+                for (const r of results) {
+                    if (!r.isSuccess) {
+                        // var li = document.createElement("li");
+                        // li.innerHTML = r.isSuccess;
+                        // ol.appendChild(li);
+                        var div = createAlertMessage(r.wb, r.rule, r.message);
+                        document.getElementById("results").appendChild(div);
+                        break;
+                    } else { 
+                        counter += 1;
+                    }
+                }
+
+                if (counter == results.length) {
+                    var div = createAlertMessage({}, {status: "success", "title": "Everything looks good!"}, "These sheets are ready for submission");
+                    document.getElementById("results").appendChild(div);
+
+                }
             });
         }
     });

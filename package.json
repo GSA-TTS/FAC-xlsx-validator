@@ -11,7 +11,9 @@
     "make": "electron-forge make",
     "build": "webpack"
   },
-  "jest": {},
+  "build": {
+    "extraResources": [ "./uswds3/**"]
+  },
   "author": "Matt Jadud <matthew.jadud@gsa.gov>",
   "license": "CC0-1.0",
   "devDependencies": {
@@ -22,6 +24,7 @@
     "@electron-forge/maker-rpm": "^6.0.0-beta.63",
     "@electron-forge/maker-squirrel": "^6.0.0-beta.63",
     "@electron-forge/maker-zip": "^6.0.0-beta.63",
+    "@uswds/compile": "^1.0.0-beta.2",
     "babel-loader": "^8.2.5",
     "electron": "^18.1.0",
     "electron-packager": "^15.5.1",
@@ -31,6 +34,7 @@
     "xslx": "^1.0.0"
   },
   "dependencies": {
+    "@uswds/uswds": "^3.0.0",
     "browserify": "^17.0.0",
     "electron-squirrel-startup": "^1.0.0",
     "esm": "^3.2.25",

@@ -6,16 +6,28 @@ var types = {
 };
 
 function locationIsInteger(wb, rule) {
+   
     var the_sheet = wb.Sheets[rule.sheetname];
-    var s = the_sheet[rule.location];
-    var n = Math.floor(Number(s));
-    if (isNaN(n) || (n !== Infinity && String(n) === s && n >= 0)) {
+    if (!the_sheet.hasOwnProperty(rule.location)) {
+        return new core.Failure(wb, rule, "Cell " + rule.location + " note found in sheet " + rule.sheetname);
+    }
+
+    
+    var cell = the_sheet[rule.location];
+    var cell_type = cell.t;
+    var cell_value = cell.v;
+    var n = Math.floor(Number(cell_value));
+    console.log("number found: ", n);
+    if (isNaN(n) && 
+        (n !== Infinity) && 
+        (String(n) === cell.w) && 
+        (cell_type === "n")) {
         var msg = rule.message;
         msg = msg.replace("LOCATION", rule.location);
         msg = msg.replace("SHEETNAME", rule.sheetname);
         return new core.Failure(wb, rule, msg);
     }
-    return new core.Success(wb, rule, rule.location + " is typeof " + rule.type);
+    return new core.Success(wb, rule, rule.location + " is typeof " + rule.type);    
 }
 
 function locationIsType(wb, rule) {

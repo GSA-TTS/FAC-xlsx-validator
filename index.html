@@ -5,16 +5,50 @@
     <!-- https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP -->
     <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'">
     <meta http-equiv="X-Content-Security-Policy" content="default-src 'self'; script-src 'self'">
-    <title>Hello World!</title>
+    <link rel="stylesheet" href="uswds3/css/uswds.css">
+    <link rel="stylesheet" href="local/custom.css">
+    <title>Federal Audit Clearinghouse XLSX Validator</title>
   </head>
   <body>
-    <h1>Hello World!</h1>
-    We are using Node.js <span id="node-version"></span>,
-    Chromium <span id="chrome-version"></span>,
-    and Electron <span id="electron-version"></span>.
-
+    <div class="usa-overlay"></div>
+    <header class="usa-header usa-header--basic">
+      <div class="usa-nav-container">
+        <div class="usa-navbar">
+          <div class="usa-logo" id="-logo">
+            <em class="usa-logo__text"
+              ><a href="/" title="[Project title]">Federal Audit Clearinghouse XLSX Validator</a>
+            </em>
+          </div>
+        </div>
+      </div>
+    </header>
+    <div class="usa-section">
+      <div class="grid-container">
+          <main
+            class="
+              usa-layout-docs__main
+              desktop:grid-col-9
+              usa-prose usa-layout-docs
+            "
+            id="main-content"
+          >
+          
+            <h1>Drop your workbooks here</h1>
+            <p class="usa-intro">
+              Drag-and-drop your workbooks onto this window, and we will check to see if they
+              are ready for submission.
+            </p>
+          <div id="results"></div>
+          </main>
+        </div>
+      </div>
+    </div>
+    
+    
   </body>
-  <script src="./local/xlsx.full.min.js"></script>
+  <script src="uswds3/js/uswds-init.js"></script>
+  <script src="uswds3/js/uswds.js"></script>
+  <script src="local/xlsx.full.min.js"></script>
   <script src="dist/bundle.js"></script>
   <script src="index.js"></script>
 </html>

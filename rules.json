@@ -4,18 +4,29 @@
     "rules": [
         {
             "id": "SHEET_DATA_ENTRY_EXISTS",
+            "status": "error",
             "category": "sheet_exists",
             "sheetname": "Data_Entry",
-            "description": "Check to see if the sheet called 'Data_Entry' exists",
+            "title": "Looking for sheets within the workbook",
             "message": "Your workbook is missing the sheet named SHEETNAME"
         },
         {
+            "id": "CELL_CONTAINS_VALUE",
+            "status": "error",
+            "category": "cell_exists",
+            "sheetname": "Data_Entry",
+            "location": "D2",
+            "title": "Looking for data in a cell",
+            "message": "Found nothing in cell LOCATION" 
+        },
+        {
             "id": "EIN_VALUE_EXISTS",
+            "status": "error",
             "category": "cell_value_type",
             "sheetname": "Data_Entry",
             "location": "D2",
             "type": "integer",
-            "description": "Looking for a valid EIN value in cell D2.",
+            "title": "Looking for correct data types",
             "message": "Expected a whole number, or integer, in cell LOCATION of sheet SHEETNAME"
         }
     ]

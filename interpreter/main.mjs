@@ -1,13 +1,12 @@
-//const core = require('./core.mjs');
 import * as core from './core.mjs';
-//const names = require('./names.mjs');
 import * as names from './names.mjs';
-//const types = require('./types.mjs');
 import * as types from './types.mjs';
+import * as values from './values.mjs';
 
 var rule_lookup = {
     "sheet_exists": names.sheetExists,
-    "cell_value_type": types.locationIsType
+    "cell_value_type": types.locationIsType,
+    "cell_exists": values.locationHasValue
 };
 
 function runRule(wb, rule) {
