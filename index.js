@@ -27,8 +27,15 @@ function createAlertMessage(wb, rule, msg) {
     return div_alert
 }
 
+function removeAllChildNodes(parent) {
+    while (parent.firstChild) {
+        parent.removeChild(parent.firstChild);
+    }
+}
+
 async function processWorkbook (path) {
     console.log(path)
+    removeAllChildNodes(document.getElementById("results"));
     const workbook = await fetch(path)
         // I'm operating in a web browser, the file is far away...
         // Read it into a local buffer.
