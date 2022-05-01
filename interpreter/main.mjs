@@ -41,6 +41,8 @@ function runRuleSet(wb, json) {
     // the ID of the ruleset that applies to this workbook.
     var ruleset_id = null;
     if (results.every(e => e.isSuccess === true)) {
+        // FIXME: We need to extract out this kind of hard-coded
+        // magic location stuff. What if this changes?
         ruleset_id = wb.Sheets.metadata.B1.v;
     }
 

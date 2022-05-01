@@ -28,12 +28,20 @@ describe("Suite for 'main'", function() {
 });
 
 describe("Suite for sheet", function() {
-    it("run test-sheet-1", function() {
+    it("run works001", function() {
         XLSX.set_fs(fs);
         var workbook = XLSX.readFile("spec/sheets/works001-minimal.xlsx", {});
         const raw = fs.readFileSync('rules.json');
         const ruleset = JSON.parse(raw);
         const results = main.runRuleSet(workbook, ruleset);
         expect(results.every( e => e.isSuccess === true)).toBe(true);
-    })
-})
+    });
+    it("run fails001", function() {
+        XLSX.set_fs(fs);
+        var workbook = XLSX.readFile("spec/sheets/fails001-minimal.xlsx", {});
+        const raw = fs.readFileSync('rules.json');
+        const ruleset = JSON.parse(raw);
+        const results = main.runRuleSet(workbook, ruleset);
+        expect(results.every( e => e.isSuccess === true)).toBe(false);
+    });
+});
