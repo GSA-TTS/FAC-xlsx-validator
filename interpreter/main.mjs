@@ -33,14 +33,18 @@ function runRuleSet(wb, json) {
     const rulesets = json.rulesets;
     var results = [];
     for (const rule of rulesets["ALWAYS"].rules) {
-        // console.log(rule.id);
+        console.log("ALWAYS " + rule.id);
         var result = runRule(wb, rule);
         results.push(result);
+        if (result.isFailure) break;
     }
+    console.log("ALWAYS ", results);
+
     // If this is true, the basics passed, and we can grab
     // the ID of the ruleset that applies to this workbook.
+    const can_proceed = results.every(e => e.isSuccess === true);
     var ruleset_id = null;
-    if (results.every(e => e.isSuccess === true)) {
+    if (can_proceed) {
         // FIXME: We need to extract out this kind of hard-coded
         // magic location stuff. What if this changes?
         ruleset_id = wb.Sheets.metadata.B1.v;
@@ -55,7 +59,7 @@ function runRuleSet(wb, json) {
         }
         return results;
     }
-    return [new core.Failure(wb, {}, "The workbook you checked did not pass checks.")]
+    return [new core.Failure(wb, {"status": "warning", "title": "Basic checks failed"}, "<p>The workbook you checked did not pass basic checks.</p><p>Did you start with a correct template?</p>")]
 }
 
 /* Exports */
