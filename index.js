@@ -1,3 +1,4 @@
+
 function readTextFile(file, callback) {
     var rawFile = new XMLHttpRequest();
     rawFile.overrideMimeType("application/json");
@@ -17,7 +18,8 @@ function createAlertMessage(wb, rule, msg) {
     div_alert_body.setAttribute("class", "usa-alert__body");
     var h4 = document.createElement("h4");
     h4.setAttribute("class", "usa-alert__heading");
-    h4.innerText = rule.title;
+    console.log(wb);
+    h4.innerHTML = wb.filepath + ": " + rule.title;
     var p = document.createElement("p");
     p.setAttribute("class", "usa-alert__text");
     p.innerHTML = msg;
@@ -42,9 +44,9 @@ function cleanupPreviousAlerts () {
     removeAllChildNodes(document.getElementById("results"));
 }
 
-async function processWorkbook (path) {
+async function processWorkbook (filepath) {
     
-    const workbook = await fetch(path)
+    const workbook = await fetch(filepath)
         // I'm operating in a web browser, the file is far away...
         // Read it into a local buffer.
         .then(resp => resp.arrayBuffer())
@@ -53,7 +55,9 @@ async function processWorkbook (path) {
         // FIXME: This is not error handling.
         .catch(err => console.error(err))
     console.log(workbook)
-    
+    const re = new RegExp(".*/(.*?\.xlsx)$")
+    workbook.filepath = re.exec(filepath)[1];
+
     var ruleset = null;
     readTextFile("./rules.json", function(text){
         ruleset = JSON.parse(text);
@@ -77,7 +81,7 @@ async function processWorkbook (path) {
 
                 // If we counted everything as being correct
                 if (!error_found) {
-                    var div = createAlertMessage({}, {status: "success", "title": "Everything looks good!"}, "These sheets are ready for submission");
+                    var div = createAlertMessage(workbook, {status: "success", "title": "Everything looks good!"}, "This looks ready for submission");
                     document.getElementById("results").appendChild(div);
                 }
             });
