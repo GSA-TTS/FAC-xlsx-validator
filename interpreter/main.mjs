@@ -32,16 +32,28 @@ function runRuleSet(wb, json) {
     // First, we need to run the basics against this workbook.
     const rulesets = json.rulesets;
     var results = [];
-    for (const ndx in rulesets) {
-        console.log(rulesets[ndx].rules);
-        for (const rule of rulesets[ndx].rules) {
-            // console.log(rule.id);
+    for (const rule of rulesets["ALWAYS"].rules) {
+        // console.log(rule.id);
+        var result = runRule(wb, rule);
+        results.push(result);
+    }
+    // If this is true, the basics passed, and we can grab
+    // the ID of the ruleset that applies to this workbook.
+    var ruleset_id = null;
+    if (results.every(e => e.isSuccess === true)) {
+        ruleset_id = wb.Sheets.metadata.B1.v;
+    }
+
+    if (ruleset_id) {
+        var results = [];
+        for (const rule of rulesets[ruleset_id].rules) {
+            console.log(rule.id);
             var result = runRule(wb, rule);
             results.push(result);
         }
-    
+        return results;
     }
-    return results;
+    return [new core.Failure(wb, {}, "The workbook you checked did not pass checks.")]
 }
 
 /* Exports */

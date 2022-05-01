@@ -2,7 +2,7 @@
     "version": "1",
     "last-updated": "2022-04-29",
     "rulesets": {
-        "basics": {
+        "ALWAYS": {
             "rules": [
                 {
                     "id": "SHEET_METADATA_EXISTS",
