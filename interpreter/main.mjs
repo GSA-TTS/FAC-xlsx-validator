@@ -56,6 +56,7 @@ function runRuleSet(wb, json) {
             console.log(rule.id);
             var result = runRule(wb, rule);
             results.push(result);
+            if (result.isFailure) break;
         }
         return results;
     }
