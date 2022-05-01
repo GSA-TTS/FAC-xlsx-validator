@@ -2,6 +2,8 @@
 import * as core from '../../interpreter/core.mjs';
 //const main = require("../../interpreter/main.js");
 import * as main from '../../interpreter/main.mjs';
+import * as fs from 'fs';
+import * as XLSX from 'xlsx/xlsx.mjs';
 
 describe("Suite for 'main'", function() {
     it("runs on empty", function() {
@@ -25,5 +27,13 @@ describe("Suite for 'main'", function() {
     });    
 });
 
-
-
+describe("Suite for sheet", function() {
+    it("run test-sheet-1", function() {
+        XLSX.set_fs(fs);
+        var workbook = XLSX.readFile("spec/sheets/works001-minimal.xlsx", {});
+        const raw = fs.readFileSync('rules.json');
+        const ruleset = JSON.parse(raw);
+        const results = main.runRuleSet(workbook, ruleset);
+        expect(results.every( e => e.isSuccess === true)).toBe(true);
+    })
+})

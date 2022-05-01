@@ -27,15 +27,23 @@ function createAlertMessage(wb, rule, msg) {
     return div_alert
 }
 
+function changeTopText() {
+    var e = document.getElementById("top-text");
+    e.innerText =  "Drag a new set of workbooks on, and we'll check them again."
+}
+
 function removeAllChildNodes(parent) {
     while (parent.firstChild) {
         parent.removeChild(parent.firstChild);
     }
 }
 
-async function processWorkbook (path) {
-    console.log(path)
+function cleanupPreviousAlerts () {
     removeAllChildNodes(document.getElementById("results"));
+}
+
+async function processWorkbook (path) {
+    
     const workbook = await fetch(path)
         // I'm operating in a web browser, the file is far away...
         // Read it into a local buffer.
@@ -46,34 +54,31 @@ async function processWorkbook (path) {
         .catch(err => console.error(err))
     console.log(workbook)
     
-    var rules = null;
+    var ruleset = null;
     readTextFile("./rules.json", function(text){
-        rules = JSON.parse(text);
-        console.log(rules);
+        ruleset = JSON.parse(text);
+        console.log(ruleset);
 
         // FIXME: What if the rules don't load?
-        if (rules != null) {
+        if (ruleset != null) {
             Promise.resolve().then(_ => {
-                var results = interpreter.runRules(workbook, rules);
-                var counter = 0;
-                var ol = document.createElement("ol");
+                var results = interpreter.runRuleSet(workbook, ruleset);
+                var error_found = false;
                 for (const r of results) {
                     if (!r.isSuccess) {
-                        // var li = document.createElement("li");
-                        // li.innerHTML = r.isSuccess;
-                        // ol.appendChild(li);
+                        // Should we only show one error at a time?
+                        // This is the BlueJ way...
                         var div = createAlertMessage(r.wb, r.rule, r.message);
                         document.getElementById("results").appendChild(div);
+                        error_found = true;
                         break;
-                    } else { 
-                        counter += 1;
-                    }
+                    } 
                 }
 
-                if (counter == results.length) {
+                // If we counted everything as being correct
+                if (!error_found) {
                     var div = createAlertMessage({}, {status: "success", "title": "Everything looks good!"}, "These sheets are ready for submission");
                     document.getElementById("results").appendChild(div);
-
                 }
             });
         }
@@ -88,7 +93,10 @@ document.addEventListener('drop', (event) => {
         // Using the path attribute to get absolute file path
         console.log('File Path of dragged files: ', f.path)
         Promise.resolve().then(_ => {
+            cleanupPreviousAlerts();
+            changeTopText();
             processWorkbook(f.path);
+            
         });
       }
       

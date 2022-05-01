@@ -1,33 +1,69 @@
 {
-    "version": "0.0.1",
+    "version": "1",
     "last-updated": "2022-04-29",
-    "rules": [
-        {
-            "id": "SHEET_DATA_ENTRY_EXISTS",
-            "status": "error",
-            "category": "sheet_exists",
-            "sheetname": "Data_Entry",
-            "title": "Looking for sheets within the workbook",
-            "message": "Your workbook is missing the sheet named SHEETNAME"
+    "rulesets": {
+        "basics": {
+            "rules": [
+                {
+                    "id": "SHEET_METADATA_EXISTS",
+                    "status": "error",
+                    "category": "sheet_exists",
+                    "sheetname": "metadata",
+                    "title": "Looking for sheets within the workbook",
+                    "message": "Your workbook is missing the 'SHEETNAME' sheet"
+                },
+                {
+                    "id": "CELL_CONTAINS_VALUE",
+                    "status": "error",
+                    "category": "cell_exists",
+                    "sheetname": "metadata",
+                    "location": "B1",
+                    "title": "Looking for data in a cell",
+                    "message": "Found nothing in cell LOCATION" 
+                },
+                {
+                    "id": "CELL_MATCHES_REGEX",
+                    "status": "error",
+                    "category": "cell_regex",
+                    "sheetname": "metadata",
+                    "location": "B1",
+                    "_comment": "https://regex101.com/",
+                    "regex": "FINDINGS_TEXT_[\\d]{4}-[\\d]{4}",
+                    "title": "Looking for the uid for this sheet in the metadata",
+                    "message": "Did not find a UID matching the pattern 'REGEX' in cell LOCATION" 
+                }
+            ]
         },
-        {
-            "id": "CELL_CONTAINS_VALUE",
-            "status": "error",
-            "category": "cell_exists",
-            "sheetname": "Data_Entry",
-            "location": "D2",
-            "title": "Looking for data in a cell",
-            "message": "Found nothing in cell LOCATION" 
-        },
-        {
-            "id": "EIN_VALUE_EXISTS",
-            "status": "error",
-            "category": "cell_value_type",
-            "sheetname": "Data_Entry",
-            "location": "D2",
-            "type": "integer",
-            "title": "Looking for correct data types",
-            "message": "Expected a whole number, or integer, in cell LOCATION of sheet SHEETNAME"
+        "FINDINGS_TEXT_2019-2022": {
+            "rules": [
+                {
+                    "id": "SHEET_DATA_ENTRY_EXISTS",
+                    "status": "error",
+                    "category": "sheet_exists",
+                    "sheetname": "Data_Entry",
+                    "title": "Looking for sheets within the workbook",
+                    "message": "Your workbook is missing the sheet named SHEETNAME"
+                },
+                {
+                    "id": "CELL_CONTAINS_VALUE",
+                    "status": "error",
+                    "category": "cell_exists",
+                    "sheetname": "Data_Entry",
+                    "location": "D2",
+                    "title": "Looking for data in a cell",
+                    "message": "Found nothing in cell LOCATION" 
+                },
+                {
+                    "id": "EIN_VALUE_EXISTS",
+                    "status": "error",
+                    "category": "cell_value_type",
+                    "sheetname": "Data_Entry",
+                    "location": "D2",
+                    "type": "integer",
+                    "title": "Looking for correct data types",
+                    "message": "Expected a whole number, or integer, in cell LOCATION of sheet SHEETNAME"
+                }
+            ]
         }
-    ]
+    }
 }

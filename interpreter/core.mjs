@@ -1,5 +1,5 @@
-const SUCCESS = "OK";
-const FAILURE = "KO";
+const SUCCESS = true;
+const FAILURE = false;
 
 class Result { 
     constructor (wb, rule, msg) {
@@ -11,6 +11,10 @@ class Result {
 
     get isSuccess() {
         return this.type === SUCCESS;
+    }
+
+    get isFailure() {
+        return this.type === FAILURE;
     }
 };
 
