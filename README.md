@@ -1,3 +1,7 @@
+# ARCHIVED 20230531
+
+This repository was a spike exploration. It served to inform, and none of the code made its way to production.
+
 # FAC XLSX Validator
 
 This is a desktop application that helps auditors validate their audit packages before submission to the FAC. Specifically, it makes sure that the Excel templates have been completed properly. 
